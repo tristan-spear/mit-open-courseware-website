@@ -117,3 +117,11 @@
       @media (prefers-reduced-motion: reduce){
         #ai-bg{ display:none; }
       }
+
+      footer {
+        z-index: 10;
+      }
+
+      iframe {
+        z-index: 100000;
+      }

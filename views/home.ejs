@@ -11,7 +11,10 @@
             <div class="card text-bg-dark mb-5" style="width: 10rem; height: 15rem;">
               <img src="./images/math2.png" class="card-img-top" alt="...">
               <div class="card-body d-flex justify-content-center align-items-center">
-                <a href="https://ocw.mit.edu/search/?d=Mathematics" class="btn btn-outline-info mt-1" target="_blank">Mathematics</a>
+                <form method="POST" action="/frame">
+                  <input type="hidden" name="idx" value="0">
+                  <button type="submit" class="btn btn-outline-info mt-1">Mathematics</button>
+                </form>
               </div>
             </div>
  
@@ -22,7 +25,12 @@
             <div class="card text-bg-dark mb-5" style="width: 10rem; height: 15rem;">
               <img src="./images/phys2.png" class="card-img-top" alt="...">
               <div class="card-body d-flex justify-content-center align-items-center">
-                <a href="https://ocw.mit.edu/search/?d=Physics" target="_blank" class="btn btn-outline-info mt-1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Physics&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+
+                <form method="POST" action="/frame">
+                  <input type="hidden" name="idx" value="1">
+                  <button type="submit" class="btn btn-outline-info mt-1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Physics&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
+                </form>
+
               </div>
             </div>
 
@@ -33,7 +41,12 @@
             <div class="card text-bg-dark mb-5" style="width: 10rem; height: 15rem;">
               <img src="./images/chem.png" class="card-img-top" alt="...">
               <div class="card-body d-flex justify-content-center align-items-center">
-                <a href="https://ocw.mit.edu/search/?d=Chemistry" target="_blank" class="btn btn-outline-info mt-1">&nbsp;&nbsp;Chemistry&nbsp;&nbsp;</a>
+
+                <form method="POST" action="/frame">
+                  <input type="hidden" name="idx" value="2">
+                  <button type="submit" class="btn btn-outline-info mt-1">&nbsp;&nbsp;Chemistry&nbsp;&nbsp;</button>
+                </form>
+
               </div>
             </div>
 
@@ -46,7 +59,12 @@
             <div class="card text-bg-dark mb-3" style="width: 10rem; height: 15rem;">
               <img src="./images/cs.png" class="card-img-top" alt="...">
               <div class="card-body d-flex justify-content-center align-items-center">
-                <a href="https://ocw.mit.edu/search/?d=Electrical%20Engineering%20and%20Computer%20Science" target="_blank" class="btn btn-outline-info p-0">Computer Science</a>
+
+                <form method="POST" action="/frame">
+                  <input type="hidden" name="idx" value="3">
+                  <button type="submit" class="btn btn-outline-info mb-5 p-0">Computer Science</button>
+                </form>
+
               </div>
             </div>
  
@@ -57,7 +75,12 @@
             <div class="card text-bg-dark mb-3" style="width: 10rem; height: 15rem;">
               <img src="./images/engr2.png" class="card-img-top" alt="...">
               <div class="card-body d-flex justify-content-center align-items-center">
-                <a href="https://ocw.mit.edu/search/?d=Engineering%20Systems%20Division&d=Chemical%20Engineering&d=Mechanical%20Engineering&d=Biological%20Engineering&d=Electrical%20Engineering%20and%20Computer%20Science&d=Nuclear%20Science%20and%20Engineering&d=Materials%20Science%20and%20Engineering&d=Civil%20and%20Environmental%20Engineering" target="_blank" class="btn btn-outline-info mt-1">&nbsp;Engineering&nbsp;</a>
+
+                <form method="POST" action="/frame">
+                  <input type="hidden" name="idx" value="4">
+                  <button type="submit" class="btn btn-outline-info mt-1">&nbsp;Engineering&nbsp;</button>
+                </form>
+
               </div>
             </div>
 
@@ -68,7 +91,12 @@
             <div class="card text-bg-dark mb-3" style="width: 10rem; height: 15rem;">
               <img src="./images/bio.png" class="card-img-top" alt="...">
               <div class="card-body d-flex justify-content-center align-items-center">
-                <a href="https://ocw.mit.edu/search/?d=Biology" class="btn btn-outline-info mt-1" target="_blank">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Biology&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+
+                <form method="POST" action="/frame">
+                  <input type="hidden" name="idx" value="5">
+                  <button type="submit" class="btn btn-outline-info mt-1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Biology&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
+                </form>
+
               </div>
             </div>
 
@@ -79,6 +107,22 @@
 
     </main>
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha384-..." crossorigin="anonymous"></script>
+
+    <!-- <script>
+
+      $(".btn").click(function() {
+        $.post (
+          "/frame",
+          {
+            idx : $(this).attr("id"),
+          }
+        );
+      });
+    </script> -->
+
     <%- include("./partials/footer.ejs") %>
+
+    
 
 

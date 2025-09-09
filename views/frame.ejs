@@ -1,0 +1,22 @@
+<%- include("./partials/header.ejs") %>
+<%- include("./partials/canvas.ejs") %>
+
+<% if (mitLink) { %>
+
+    <main class="">
+        <div class="container" style="height:600px; width:67%; position: relative; z-index: 1; padding-top: 37px;">
+            <iframe style="height:600px; width:100%; position: relative; z-index: 1;" src=<%= mitLink %>></iframe>
+        </div>
+    </main>
+
+<% } else { %>
+
+    <main class="">
+        <div class="container" style="height:600px; width:100%; position: relative; z-index: 1; padding-top: 37px;">
+            <iframe style="height:600px; width:100%; position: relative; z-index: 1;" src="https://ocw.mit.edu/"></iframe>
+        </div>
+    </main>
+
+<% } %>
+
+<%- include("./partials/footer.ejs") %>

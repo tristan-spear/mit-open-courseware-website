@@ -30,6 +30,10 @@ app.get("/about", (req, res) => {
   res.render("about.ejs");
 });
 
+app.get("/contact", (req, res) => {
+  res.render("contact.ejs");
+});
+
 app.post("/frame", (req, res) => {
   const buttonIdx = req.body.idx;
   const courseLink = links[buttonIdx];

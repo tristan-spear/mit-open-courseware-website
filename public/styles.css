@@ -123,5 +123,10 @@
       }
 
       iframe {
-        z-index: 100000;
+        z-index: 10;
+      }
+
+      .underline-thin {
+        text-decoration: underline;
+        text-decoration-thickness: 2px;
       }

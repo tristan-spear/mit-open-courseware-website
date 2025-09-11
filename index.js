@@ -1,4 +1,9 @@
+import dotenv from "dotenv";
 import express from "express";
+import nodemailer from "nodemailer";
+import path from "path";
+
+dotenv.config();
 
 const app = express();
 const port = 3000;
@@ -42,6 +47,40 @@ app.post("/frame", (req, res) => {
   res.render("frame.ejs", {
     mitLink : courseLink,
   });
+});
+
+app.post("/contact-me", async (req, res) => {
+  const { name, email, message } = req.body;
+
+  try {
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS,
+      },
+    });
+
+    await transporter.sendMail({
+      from: email,
+      to: "tspear1704@gmail.com",
+      subject: `MIT Site Contact Form Email from ${name}`,
+      text: message,
+      replyTo: email,
+    });
+
+    // res.status(200).send("Message sent successfully!");
+    res.send(`
+      <script>
+        alert("Message sent successfully!");
+        window.location.href = "/contact";
+      </script>
+    `);
+    
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Error sending message.");
+  }
 });
 
 app.listen(port, () => {

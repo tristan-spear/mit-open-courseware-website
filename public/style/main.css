@@ -63,12 +63,12 @@ h1.title {
   background: #8A8B8C;
   padding: 15px 25px;
   font-size: 20px;
-  height: 55px;
+  height: 60px;
   line-height: 47px;
   font-weight: bold;
   border-radius: 3px;
   color: white;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
   text-align: center; }
   .score-container:after, .best-container:after {
     position: absolute;

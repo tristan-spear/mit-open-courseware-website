@@ -1,2 +1,2 @@
 # mit-open-courseware-website
-A collection of MIT's Open CourseWare videos from YouTube.
+A blog-style website that allows students to easily access MIT's free courses for different STEM subjects.

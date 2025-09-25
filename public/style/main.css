@@ -11,7 +11,12 @@ html, body {
   color: black;
   color: #222;
   font-family: "Clear Sans", "Helvetica Neue", Arial, sans-serif;
-  font-size: 18px; }
+  /* font-size: 18px; */ }
+
+.retry-button 
+{
+  font-size: 18px;
+}
 
 .heading:after {
   content: "";
@@ -107,11 +112,11 @@ p {
   margin-bottom: 10px;
   line-height: 1.65; }
 
-a {
+/* a {
   color: #A31F34;
   font-weight: bold;
   text-decoration: underline;
-  cursor: pointer; }
+  cursor: pointer; } */
 
 strong.important {
   text-transform: uppercase; }
@@ -194,7 +199,7 @@ hr {
     .game-container .game-message .lower {
       display: block;
       margin-top: 59px; }
-    .game-container .game-message a {
+    .game-container .game-message .retry-button {
       display: inline-block;
       background: #8f7a66;
       border-radius: 3px;
@@ -567,7 +572,7 @@ hr {
       .game-container .game-message .lower {
         display: block;
         margin-top: 59px; }
-      .game-container .game-message a {
+      .game-container .game-message {
         display: inline-block;
         background: #8f7a66;
         border-radius: 3px;

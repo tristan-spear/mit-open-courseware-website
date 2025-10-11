@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <title>MIT Open Courseware</title>
+    <link rel="icon" type="image/png" href="/images/mit-logo.png" />
+
+    <link rel="stylesheet" href="/bootstrap-5.3.8-dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/styles.css" /> -->
+</head>
+<body>
+
+<!-- Space Starfield with Nebulae + Shooting Stars -->
+<canvas id="ai-bg" aria-hidden="true"></canvas>
+
+<script>
+(function(){
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const canvas = document.getElementById('ai-bg');
+  if (!canvas || prefersReducedMotion) return;
+
+  const ctx = canvas.getContext('2d');
+  const DPR = Math.max(1, Math.min(window.devicePixelRatio || 1, 2));
+  let W=0, H=0, CX=0, CY=0;
+
+  // Tunables
+  const SPEED = 0.0015;         // very slow drift
+  const STAR_DENSITY = 0.08;    // stars per 1k px^2
+  const TRAIL_ALPHA = 0.15;     // background fade for trails
+  const SHOOT_PROB = 0.002;     // chance per frame for shooting star
+  const SHOOT_MAX = 4;          // max shooting stars
+
+  let stars=[], shooters=[];
+
+  function rand(a=0,b=1){ return a + Math.random()*(b-a); }
+  function clamp(x,a,b){ return Math.max(a, Math.min(b,x)); }
+
+  function resize(){
+    W = Math.floor(window.innerWidth * DPR);
+    H = Math.floor(window.innerHeight * DPR);
+    CX = W*0.5; CY = H*0.5;
+    canvas.width = W; canvas.height = H;
+    canvas.style.width = window.innerWidth + 'px';
+    canvas.style.height = window.innerHeight + 'px';
+    const targetStars = Math.floor((W*H)/1000 * STAR_DENSITY);
+    stars = Array.from({length: targetStars}, newStar);
+  }
+
+  function newStar(){
+    return { x: rand(-1,1), y: rand(-1,1), z: rand(0.2,1.0), tw: rand(0,Math.PI*2) };
+  }
+
+  function newShootingStar(){
+    const angle = rand(Math.PI*0.15, Math.PI*0.35);
+    const speed = rand(5,8) * DPR;
+    return {
+      x: rand(0,W), y: -50,
+      vx: Math.cos(angle)*speed, vy: Math.sin(angle)*speed,
+      life: rand(0.8,1.5), age: 0,
+      width: rand(1.2,2.0)*DPR, len: rand(80,140)*DPR
+    };
+  }
+
+  function project(x,y,z){
+    const k = 0.9 / z;
+    return [x*k*CX + CX, y*k*CY + CY];
+  }
+
+  function drawStar(s){
+    const [sx, sy] = project(s.x,s.y,s.z);
+    if (sx<-50||sx>W+50||sy<-50||sy>H+50) return;
+    const r=Math.max(0.6,(1.6-s.z)*1.0);
+    s.tw+=0.015;
+    const alpha=clamp((1.2-s.z)*0.7*(0.7+0.3*Math.sin(s.tw)),0,1);
+    ctx.globalCompositeOperation='lighter';
+    ctx.beginPath(); ctx.arc(sx,sy,r,0,Math.PI*2);
+    ctx.fillStyle=`rgba(255,255,255,${alpha})`; ctx.fill();
+    ctx.globalCompositeOperation='source-over';
+  }
+
+  function drawShootingStar(m,dt){
+    m.age+=dt; m.x+=m.vx; m.y+=m.vy;
+    const alpha=clamp(1-(m.age/m.life),0,1);
+    if(alpha<=0) return false;
+    ctx.globalCompositeOperation='lighter';
+    const grad=ctx.createLinearGradient(m.x,m.y,m.x-m.vx*0.2,m.y-m.vy*0.2);
+    grad.addColorStop(0,`rgba(255,255,255,${0.9*alpha})`);
+    grad.addColorStop(1,'rgba(255,255,255,0)');
+    ctx.strokeStyle=grad; ctx.lineWidth=m.width;
+    ctx.beginPath(); ctx.moveTo(m.x,m.y);
+    ctx.lineTo(m.x-m.vx*6,m.y-m.vy*6); ctx.stroke();
+    ctx.globalCompositeOperation='source-over';
+    return !(m.x<-200||m.x>W+200||m.y<-200||m.y>H+200);
+  }
+
+  let last=performance.now();
+  function frame(now){
+    const dt=(now-last)/1000; last=now;
+    ctx.fillStyle=`rgba(0,0,0,${TRAIL_ALPHA})`; ctx.fillRect(0,0,W,H);
+    for(let s of stars){ s.z-=SPEED; if(s.z<=0.1) Object.assign(s,newStar()); drawStar(s); }
+    if(shooters.length<SHOOT_MAX && Math.random()<SHOOT_PROB) shooters.push(newShootingStar());
+    shooters=shooters.filter(m=>drawShootingStar(m,dt));
+    requestAnimationFrame(frame);
+  }
+
+  window.addEventListener('resize', resize, {passive:true});
+  resize(); requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>

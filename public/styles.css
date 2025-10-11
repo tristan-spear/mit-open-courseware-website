@@ -1,0 +1,132 @@
+
+      .hover-white:hover {
+        color: #ffffff !important;
+        transition: color 0.3s ease;
+      }
+      .rainbow-hover {
+        position: relative;
+        display: inline-block;
+        color: #ccc;
+        transition: color 0.3s ease;
+      }
+      .rainbow-hover:hover {
+        background: linear-gradient(270deg, red, orange, yellow, green, blue, indigo, violet);
+        background-size: 1400% 1400%;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: rainbowShift 8s ease infinite;
+      }
+
+      @keyframes rainbowShift {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+      }
+      html, body {
+        height: 100%;
+      }
+      body {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+      }
+      main {
+        flex: 1;
+      }
+
+      /* === Futuristic animated background === */
+      body {
+        background-color: #0b0f17; /* deep space */
+        position: relative;
+        overflow-x: hidden;
+      }
+
+      /* Soft animated aurora glows */
+      body::before {
+        content: "";
+        position: fixed;
+        inset: -20vmax -10vmax auto -10vmax;
+        width: 140vmax;
+        height: 80vmax;
+        background:
+          radial-gradient(40% 60% at 20% 50%, rgba(0, 255, 120, 0.18), transparent 60%),
+          radial-gradient(60% 45% at 80% 45%, rgba(0, 180, 60, 0.16), transparent 65%),
+          radial-gradient(50% 50% at 55% 80%, rgba(0, 255, 160, 0.10), transparent 70%);
+        filter: blur(60px) saturate(140%);
+        animation: auroraShift 26s ease-in-out infinite alternate;
+        z-index: -2;
+        pointer-events: none;
+        will-change: transform, opacity;
+      }
+
+      /* Subtle animated grid (sci‑fi HUD vibe) */
+      body::after {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background-image:
+          linear-gradient(rgba(0, 255, 70, 0.06) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(0, 255, 70, 0.06) 1px, transparent 1px);
+        background-size: 80px 80px, 80px 80px;
+        background-position: 0 0, 0 0;
+        animation: gridScroll 80s linear infinite;
+        z-index: -1;
+        pointer-events: none;
+      }
+
+      @keyframes auroraShift {
+        0%   { transform: translate3d(-4%, -2%, 0) rotate(0.5deg); opacity: 0.8; }
+        50%  { transform: translate3d(4%, 3%, 0)   rotate(-0.5deg); opacity: 0.9; }
+        100% { transform: translate3d(-2%, 1%, 0)  rotate(0.3deg); opacity: 0.85; }
+      }
+
+      @keyframes gridScroll {
+        0%   { background-position: 0 0, 0 0; }
+        100% { background-position: 800px 800px, 800px 800px; }
+      }
+
+      /* === Elegant Matrix Rain Layer === */
+      #matrix {
+        position: fixed;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+        mix-blend-mode: screen;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        body::before,
+        body::after {
+          animation: none;
+        }
+        #matrix { display: none; }
+      }
+
+      /* Optional: elevate header/footer slightly above the glows */
+      header, footer {
+        position: relative;
+        z-index: 1;
+      }
+
+      #ai-bg{
+        position: fixed;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+        display: block;
+      }
+      @media (prefers-reduced-motion: reduce){
+        #ai-bg{ display:none; }
+      }
+
+      footer {
+        z-index: 10;
+      }
+
+      iframe {
+        z-index: 10;
+      }
+
+      .underline-thin {
+        text-decoration: underline;
+        text-decoration-thickness: 2px;
+      }

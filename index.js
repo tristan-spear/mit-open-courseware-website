@@ -63,7 +63,7 @@ app.post("/contact-me", async (req, res) => {
 
     await transporter.sendMail({
       from: email,
-      to: "tspear1704@gmail.com",
+      to: process.env.EMAIL_USER,
       subject: `MIT Site Contact Form Email from ${name}`,
       text: message,
       replyTo: email,
